@@ -1,0 +1,22 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier';
+    font-size: 10pt;
+    font-weight: bold;
+    line-height: 7pt;
+    color: white;
+    background-color: black;
+}
+
+canvas{
+    display: block;
+} 
+
+div{
+    background-color: rgb(27, 27, 27);
+    width: 400px;
+    height: 400px;
+    /* overflow: hidden; */
+}
