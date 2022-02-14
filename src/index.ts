@@ -13,7 +13,7 @@ const sketch = (p: any) => {
     }
     btn.addEventListener("click", saveCanvasHandler); 
     p.preload = () => {
-        displayImg = p.loadImage("../img/resol.png")
+        displayImg = p.loadImage("../img/resol.png");
     };
     p.setup = () => {
         // const canvas = p.createCanvas(400, 400);
@@ -30,8 +30,12 @@ const sketch = (p: any) => {
         console.log(displayImg.width, h, p.width);
         console.log(displayImg.height, w, p.height);
         
-        container.style.width = `${800}px`;
-        container.style.height = `${960.00}px`;
+        const displayWidth = displayImg.width;
+        const displayHeight = displayImg.height / displayWidth;
+        const scale = 564;
+        document.body.style.fontSize = `${Math.floor(scale / 100)}pt`;
+        container.style.width = `${scale}px`;
+        container.style.height = `${displayHeight * scale}px`;
         container.style.position = "relative"; 
         
         for (let j = 0; j < displayImg.height; j++){
