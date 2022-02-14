@@ -3,9 +3,9 @@ html, body{
     padding: 0;
     box-sizing: border-box;
     font-family: 'Courier';
-    font-size: 10pt;
+    font-size:10pt;
     font-weight: bold;
-    line-height: 7pt;
+    line-height: 0;
     color: white;
     background-color: black;
 }
@@ -13,10 +13,21 @@ html, body{
 canvas{
     display: block;
 } 
-
-div{
-    background-color: rgb(27, 27, 27);
-    width: 400px;
-    height: 400px;
+img{
+    /* transform: scale(10); */
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+}
+button{
+    display: none;
+}
+.canvas{
+    overflow: hidden;
+    /* background-color: rgb(5, 5, 48); */
+    border: 1px solid yellow;
+    /* width: 400px;
+    height: 400px; */
     /* overflow: hidden; */
 }

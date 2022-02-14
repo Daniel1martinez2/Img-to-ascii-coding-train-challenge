@@ -7,59 +7,61 @@ const density = "Ñ@#W$9876543210?!abc;:+=-,._  ";
 const len = density.length;
 
 const sketch = (p: any) => {
-    let vermeerImg: p5.Image;
+    let displayImg: p5.Image;
     const saveCanvasHandler = () => {
         p.save("img.png");
     }
     btn.addEventListener("click", saveCanvasHandler); 
     p.preload = () => {
-        vermeerImg = p.loadImage("../img/resol.png")
+        displayImg = p.loadImage("../img/resol.png")
     };
     p.setup = () => {
         // const canvas = p.createCanvas(400, 400);
         // canvas.parent("my-canvas");
         p.noCanvas()
         p.background(9, 4, 27);
-        let w = p.width / vermeerImg.width;
-        let h = p.height / vermeerImg.height;
+        let w = p.width / displayImg.width;
+        let h = p.height / displayImg.height;
         
-        vermeerImg.loadPixels();
-        // p.image(vermeerImg, 0, 0, p.width, p.height)
+        displayImg.loadPixels();
+        // p.image(displayImg, 0, 0, p.width, p.height)
         const container = document.createElement('div');
+        container.classList.add("canvas");
+        console.log(displayImg.width, h, p.width);
+        console.log(displayImg.height, w, p.height);
+        
+        container.style.width = `${800}px`;
+        container.style.height = `${960.00}px`;
         container.style.position = "relative"; 
         
-        for (let j = 0; j < vermeerImg.height; j++){
-            let row = '';
-            for (let i = 0; i < vermeerImg.width; i++) {
-                const pixelIndex = (i + j * vermeerImg.width) * 4;
-                const r = vermeerImg.pixels[pixelIndex + 0];    
-                const g = vermeerImg.pixels[pixelIndex + 1];
-                const b = vermeerImg.pixels[pixelIndex + 2];
+        for (let j = 0; j < displayImg.height; j++){
+            // let row = '';
+            for (let i = 0; i < displayImg.width; i++) {
+                const pixelIndex = (i + j * displayImg.width) * 4;
+                const r = displayImg.pixels[pixelIndex + 0];    
+                const g = displayImg.pixels[pixelIndex + 1];
+                const b = displayImg.pixels[pixelIndex + 2];
                 const avg = (r + g +b) / 3;
-                // p.noStroke()
-                // p.fill(r, g, b)
                 
                 const charIndex = Math.floor(p.map(avg, 0, 255, len, 0));
-                // p.square(i * w, j * h, w)
-                // p.textSize(w);
-                // p.textStyle(p.BOLD);
-                // p.textAlign(p.CENTER, p.CENTER);
-                // row += (density[charIndex], i * w + w * 0.5, j * h + h * 0.5); 
+                
 
 
                 const c = density[charIndex]; 
                 const character = document.createElement("p");
                 character.innerText =  c;
                 character.style.position = "absolute";
-                character.style.left = `${i * 10 * w + w * 0.50}px`;
-                character.style.top = `${j * 10 * h + h * 0.50}px`;
+                
+                const posH = p.map(j, 0, displayImg.height, 0, 100);
+                const posW = p.map(i, 0, displayImg.width, 0, 100);
+                   
+                character.style.left = `${posW}%`;
+                character.style.top = `${posH}%`;
                 character.style.color = `rgb(${r},${g},${b})`
-                container.appendChild(character);
-                // row += c === ' ' ? '&nbsp' : c;
+                if (c !== ' '){
+                    container.appendChild(character);
+                }
             }
-            
-            // console.log(row);
-            // p.createDiv(row);
         }
         document.body.appendChild(container);
     };
